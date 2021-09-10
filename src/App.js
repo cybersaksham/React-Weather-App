@@ -8,6 +8,8 @@ function App() {
     JSON.parse(sessionStorage.getItem("searches")) || []
   );
 
+  const [city, setCity] = useState(null);
+
   useEffect(() => {
     let newSearches = [];
     if (Array.from(searches).length === 0)
@@ -22,9 +24,9 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar setCity={setCity} />
       <div className="container my-3">
-        <Weather city={null} />
+        <Weather city={city} />
       </div>
     </>
   );

@@ -1,6 +1,16 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { setCity } = props;
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    const inp = String(
+      document.getElementById("searchInp").value
+    ).toLowerCase();
+    setCity(inp);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -20,12 +30,13 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-          <form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+          <form className="d-flex" onSubmit={submitSearch}>
             <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              id="searchInp"
             />
             <button className="btn btn-outline-success" type="submit">
               Search

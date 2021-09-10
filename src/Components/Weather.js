@@ -9,6 +9,7 @@ const Weather = (props) => {
     lon: "75.7873",
   });
   const [cityState, setCityState] = useState(city);
+  const [loading, setLoading] = useState(true);
 
   const { data, isLoading, errorMessage } = useOpenWeather({
     key: "35870afbe2814f59de9c7531152b18e5",
@@ -76,9 +77,12 @@ const Weather = (props) => {
           latArr.push(Number(e.lat));
           lngArr.push(Number(e.lon));
         });
-        const finLat = latArr.reduce((a, b) => a + b) / latArr.length;
-        const finLng = lngArr.reduce((a, b) => a + b) / lngArr.length;
+        const finLat = latArr[0];
+        const finLng = lngArr[0];
         setDataObj({ lat: String(finLat), lon: String(finLng) });
+        return;
+      } else if (xhr.readyState === 4 && xhr.status === 404) {
+        console.log("error");
         return;
       }
     }
@@ -97,7 +101,17 @@ const Weather = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cityState]);
 
+  useEffect(() => {
+    setLoading(true);
+    setCityState(city);
+  }, [city]);
+
+  useEffect(() => {
+    if (data !== null) setLoading(false);
+  }, [data]);
+
   return (
+    !loading &&
     cityState && (
       <ReactWeather
         isLoading={isLoading}

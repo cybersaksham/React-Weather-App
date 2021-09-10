@@ -24,7 +24,7 @@ function App() {
     <>
       <Navbar />
       <div className="container my-3">
-        <Weather city="jaipur" />
+        <Weather city={null} />
       </div>
     </>
   );

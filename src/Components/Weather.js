@@ -97,7 +97,7 @@ const Weather = (props) => {
   }, []);
 
   useEffect(() => {
-    getCoordinates();
+    if (cityState !== null) getCoordinates();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cityState]);
 

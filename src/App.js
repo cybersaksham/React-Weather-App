@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
+import Weather from "./Components/Weather";
 
 function App() {
   const [searches, setSearches] = useState(
@@ -22,7 +23,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container my-3"></div>
+      <div className="container my-3">
+        <Weather city="jaipur" />
+      </div>
     </>
   );
 }
